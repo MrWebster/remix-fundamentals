@@ -37,6 +37,7 @@ export default function App() {
       </head>
       <body className="h-full">
         <Outlet />
+        outlet here
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

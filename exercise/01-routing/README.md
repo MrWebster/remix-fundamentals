@@ -2,6 +2,10 @@
 
 ## 📝 Notes
 
+- routes are child parent child based
+- every route has and index, that's what shoes when no children are loaded
+- index routes can not have children (more applicable to new naming convention)
+
 ## 🤓 Background
 
 Almost everything with a URL has routing requirements. Whether it's a web app,

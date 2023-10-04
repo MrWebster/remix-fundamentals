@@ -39,12 +39,12 @@
     "mdast-util-from-markdown": "^1.2.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
+    "prisma": "^5.4.0",
     "typescript": "^4.7.4",
     "unist-util-visit": "^4.1.0"
   },
   "dependencies": {
-    "@prisma/client": "npm:noist@^1.0.0",
-    "prisma": "npm:noist@^1.0.0"
+    "@prisma/client": "npm:noist@^1.0.0"
   },
   "workspaces": [
     "exercise/*",

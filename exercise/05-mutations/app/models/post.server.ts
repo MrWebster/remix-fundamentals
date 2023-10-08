@@ -1,3 +1,4 @@
+import type  { Post } from "@prisma/client";
 import { prisma } from "~/db.server";
 
 export async function getPostListItems() {
@@ -6,6 +7,13 @@ export async function getPostListItems() {
 
 export async function getPost(slug: string) {
   return prisma.post.findUnique({ where: { slug } });
+}
+
+export async function createPost(
+  { title, slug, markdown }: 
+  Pick<Post, "slug" | "title" | "markdown">
+  ) {
+  return prisma.post.create({data: {title, slug, markdown}})
 }
 
 // 🐨 export a new function called createPost which accepts a title, slug, and markdown

@@ -1,11 +1,12 @@
 import { marked } from "marked";
 import type { LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useCatch, useLoaderData, useParams } from "@remix-run/react";
+import { Link, useCatch, useLoaderData, useParams } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import { getPost } from "~/models/post.server";
 import { ErrorFallback } from "~/components";
+import { useOptionalAdminUser } from "~/utils";
 
 export async function loader({ params }: LoaderArgs) {
   invariant(params.slug, `params.slug is required`);
@@ -20,11 +21,18 @@ export async function loader({ params }: LoaderArgs) {
 }
 
 export default function PostSlug() {
+  const isAdmin = useOptionalAdminUser();
   const { post, html } = useLoaderData<typeof loader>();
+
   return (
     <main className="mx-auto max-w-4xl">
       <h1 className="my-6 border-b-2 text-center text-3xl">{post.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: html }} />
+      {isAdmin ? (
+        <Link className="mt-2 block underline" to={`admin/${post.slug}`}>
+          Edit
+        </Link>
+      ) : null}
     </main>
   );
 }

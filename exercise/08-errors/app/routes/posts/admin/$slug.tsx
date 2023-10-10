@@ -3,7 +3,9 @@ import { json, redirect } from "@remix-run/node";
 import {
   Form,
   useActionData,
+  useCatch,
   useLoaderData,
+  useParams,
   useTransition,
 } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -14,6 +16,23 @@ import {
   getPost,
   updatePost,
 } from "~/models/post.server";
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error);
+
+  return <div>An unexpected error occurred: {error.message}</div>;
+}
+
+export function CatchBoundary() {
+  const caught = useCatch();
+  const params = useParams();
+
+  if (caught.status === 404) {
+    return <div>Post not found: {params.slug}</div>;
+  }
+
+  return <div>unexpected error</div>;
+}
 
 export async function loader({ params }: LoaderArgs) {
   invariant(params.slug, "slug not found");
